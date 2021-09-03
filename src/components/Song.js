@@ -1,4 +1,4 @@
-import React, { memo, /*useCallback,*/ useState } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import { styled } from '@linaria/react'
 import { /*FirebaseDatabaseMutation,*/ FirebaseDatabaseNode } from '@react-firebase/database'
 import Highlightable from 'highlightable'
@@ -30,18 +30,37 @@ const Line = ({ children }) => {
 	// 	})
 	// }, [])
 
-	// const onMouseOverHighlightedWordCallback = useCallback(e => {
-	// 	console.log('onMouseOverHighlightedWordCallback')
-	// }, [])
+	const onHighlightHover = useCallback(letterGroup => {
+		console.log('onHighlightHover', {
+			letterGroup,
+			// range,
+			// textCharIndex,
+			// onMouseOverHighlightedWord,
+		})
+	}, [])
 
-	// const rangeRenderer = (
-	// 	currentRenderedNodes,
-	// 	currentRenderedRange,
-	// 	currentRenderedIndex,
-	// 	onMouseOverHighlightedWord
-	// ) => {
-	// 	return <div>NODE</div>
-	// }
+	const onHighlightClick = useCallback(letterGroup => {
+		console.log('onHighlightClick', {
+			letterGroup,
+			// range,
+			// textCharIndex,
+			// onMouseOverHighlightedWord,
+		})
+	}, [])
+
+	const rangeRenderer = useCallback(
+		(letterGroup, range, textCharIndex, onMouseOverHighlightedWord) => {
+			return (
+				<Highlight
+					onClick={() => onHighlightClick(letterGroup)}
+					onMouseEnter={() => onHighlightHover(letterGroup)}
+				>
+					{letterGroup}
+				</Highlight>
+			)
+		},
+		[onHighlightClick, onHighlightHover]
+	)
 
 	const hash = simpleHash(children)
 
@@ -58,13 +77,14 @@ const Line = ({ children }) => {
 						<Highlightable
 							ranges={ranges}
 							enabled={true}
+							onTextHighlighted={() => {}}
 							// onTextHighlighted={value => onTextHighlightedCallback(value, runMutation, ranges)}
 							id={hash}
-							// onMouseOverHighlightedWord={e => onMouseOverHighlightedWordCallback(e)}
-							highlightStyle={{
-								backgroundColor: '#ffcc80',
-							}}
+							// highlightStyle={{
+							// 	backgroundColor: '#ffcc80',
+							// }}
 							text={text}
+							rangeRenderer={rangeRenderer}
 						/>
 					</LineWrapper>
 				)
@@ -253,6 +273,14 @@ const Song = () => {
 		</>
 	)
 }
+
+const Highlight = styled.span`
+	background-color: #ffcc80;
+
+	&:hover {
+		background-color: lightgreen;
+	}
+`
 
 const LineWrapper = styled.div`
 	line-height: 1.4;
