@@ -31,12 +31,12 @@ const Line = ({ children }) => {
 	// }, [])
 
 	const onHighlightHover = useCallback(letterGroup => {
-		console.log('onHighlightHover', {
-			letterGroup,
-			// range,
-			// textCharIndex,
-			// onMouseOverHighlightedWord,
-		})
+		// console.log('onHighlightHover', {
+		// 	letterGroup,
+		// 	// range,
+		// 	// textCharIndex,
+		// 	// onMouseOverHighlightedWord,
+		// })
 	}, [])
 
 	const onHighlightClick = useCallback(letterGroup => {
@@ -276,6 +276,8 @@ const Song = () => {
 
 const Highlight = styled.span`
 	background-color: #ffcc80;
+	padding: 2px 4px;
+	border-radius: 2px;
 
 	&:hover {
 		background-color: lightgreen;
@@ -283,7 +285,7 @@ const Highlight = styled.span`
 `
 
 const LineWrapper = styled.div`
-	line-height: 1.4;
+	line-height: 1.6;
 `
 const Group = styled.div`
 	margin-bottom: 32px;

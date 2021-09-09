@@ -15,6 +15,7 @@
 		"firebase": "^8.10.0",
 		"highlightable": "^1.0.7",
 		"react": "^0.0.0-experimental-bd070eb2c",
+		"react-audio-player": "^0.17.0",
 		"react-dom": "^0.0.0-experimental-bd070eb2c",
 		"react-scripts": "4.0.1",
 		"web-vitals": "^0.2.4",
